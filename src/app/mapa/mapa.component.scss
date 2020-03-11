@@ -1,0 +1,43 @@
+#lmapa { 
+    height: 98vh;
+}
+
+#popup_button{
+    // background-color: map-get($colors, gis-primary);
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 4px 7px 4px 7px;
+    text-decoration: none;
+    width: 180px;
+}
+.info-image{
+    max-width: 20%;
+    color:blue;
+}
+
+.leaflet-tooltip.label {
+    background: green;
+    border: 2px solid cyan
+  }
+  
+  .leaflet-tooltip-left.label::before {
+    border-left-color: cyan;
+  }
+  
+  .leaflet-tooltip-right.label::before {
+    border-right-color: cyan;
+  }
+  
+  // .fixedLabel{
+  //   white-space: nowrap;
+  //   color: blue
+  //   }

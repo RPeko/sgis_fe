@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-list>
+    <mat-list-item *ngFor="let item of data.simboli">
+        <img src="{{item.img}}">{{"  -  " + item.tekst}}
+    </mat-list-item>
+</mat-list>
+<div class="actions" mat-dialog-actions>
+    <button class="btn" mat-stroked-button [mat-dialog-close]="false">OK</button>
+</div>

@@ -1,0 +1,44 @@
+<h3>{{layer.naziv}}</h3>
+<div *ngIf="layer.fillColor">
+    <h5>Boja sloja:</h5>
+    <input 
+    [(colorPicker)]="layer.fillColor" 
+    [style.background]="layer.fillColor" 
+    [cpPosition]="top-right" 
+    (colorPickerSelect)="changedLayerPreview()"/>
+</div>
+<div *ngIf="layer.fillOpacity">
+    <h5>Prozirnost sloja:</h5>
+    <mat-slider
+    (change)="changedLayerPreview()"
+    class="slider"
+    [max]="1"
+    [min]="0"
+    [step]="0.05"
+    [thumbLabel]="false"
+    [tickInterval]="0.1"
+    [(ngModel)]="layer.fillOpacity">
+</mat-slider>
+</div>
+<div  *ngIf="layer.strokeColor">
+   <h5>Boja ivica:</h5>
+    <input 
+    [(colorPicker)]="layer.strokeColor" 
+    [style.background]="layer.strokeColor" 
+    [cpPosition]="top-right" 
+    (colorPickerSelect)="changedLayerPreview()"/>
+</div>
+<div *ngIf="layer.strokeOpacity">
+    <h5>Prozirnost ivica:</h5>
+    <mat-slider
+    (change)="changedLayerPreview()"
+    class="slider"
+    [max]="1"
+    [min]="0"
+    [step]="0.05"
+    [thumbLabel]="false"
+    [tickInterval]="0.1"
+    [(ngModel)]="layer.strokeOpacity">
+</mat-slider>
+</div>
+

@@ -1,0 +1,119 @@
+<ngx-ui-loader></ngx-ui-loader>
+<ngx-ui-loader [loaderId]="'rasveta'"></ngx-ui-loader>
+<mat-drawer-container>
+  <mat-drawer #sideNav mode="side" opened="true" >
+    <button mat-icon-button class="hideSideNavBtn" (click)="sideNav.toggle()">
+      <mat-icon>maximize</mat-icon>
+    </button>
+    <div class="meni-ko">
+      <button mat-button [matMenuTriggerFor]="menuKO">
+        <mat-icon>swap_horiz</mat-icon>promeni k.o.{{currentKO}}
+      </button>
+    </div>
+    <div>
+      <h4 matSubheader>
+        Izaberi slojeve:
+      </h4>
+      <mat-list (click)="$event.stopPropagation()">
+        <ng-container *ngFor="let kat of listaKat">
+          <h2 matSubheader>
+            <button mat-button (click)="toggleCollapsed(kat)">
+              <mat-icon matListIcon *ngIf="!kat.collapsed && (kat.layers.length>0 || kat.subkat.length>0)">
+                arrow_drop_up_circle</mat-icon>
+              <mat-icon matListIcon *ngIf="kat.collapsed && (kat.layers.length>0 || kat.subkat.length>0)">
+                arrow_drop_down_circle</mat-icon>
+              {{kat.opis}}
+            </button>
+            <button mat-icon-button *ngIf="!kat.collapsed && kat.layers.length>0" (click)="checkAll(kat)">
+              <mat-icon>
+                done_all</mat-icon>
+            </button>
+          </h2>
+          <mat-list *ngIf="!kat.collapsed">
+            <ng-container *ngTemplateOutlet="listitem; context: {k: kat}"></ng-container>
+          </mat-list>
+          <ng-container *ngIf="!kat.collapsed">
+            <mat-list *ngFor="let subkat of kat.subkat" class="subkat">
+              <h3 matSubheader>
+                <button mat-button (click)="toggleCollapsed(subkat)">
+                  <mat-icon *ngIf="!subkat.collapsed && subkat.layers.length>0">arrow_drop_up_circle</mat-icon>
+                  <mat-icon *ngIf="subkat.collapsed && subkat.layers.length>0">arrow_drop_down_circle</mat-icon>
+                  {{subkat.opis}}
+                </button>
+                <button mat-icon-button *ngIf="!subkat.collapsed && subkat.layers.length>0" (click)="checkAll(subkat)">
+                  <mat-icon matListIcon>
+                    done_all</mat-icon>
+                </button>
+              </h3>
+              <mat-list *ngIf="!subkat.collapsed">
+                <ng-container *ngTemplateOutlet="listitem; context: {k: subkat}"></ng-container>
+              </mat-list>
+            </mat-list>
+          </ng-container>
+        </ng-container>
+      </mat-list>
+    </div>
+    <mat-menu #menuKO="matMenu">
+      <button mat-menu-item *ngFor="let KO of listaKO" (click)="promeniKO(KO)">{{KO.nazivKO}}</button>
+    </mat-menu>
+    <div class="ukloni-slojeve">
+      <button mat-button (click)="removeAllLayers()">
+        <mat-icon>layers_clear</mat-icon>ukloni sve slojeve
+      </button>
+    </div>
+    <div class="ogranicenje">
+      <p>
+        Podaci u GIS-u su orijentacioni
+      </p>
+      <p>
+        i nisu za službenu upotrebu.
+      </p>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="sideNav.isOpen?mapa-container:mapa-container">
+    <router-outlet>
+      <div class="showSideNavContainer">
+        <button mat-raised-button *ngIf="!sideNav.opened" class="showSideNavBtn" (click)="sideNav.toggle()">
+          <mat-icon>launch</mat-icon>
+        </button>
+      </div>
+    </router-outlet>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<ng-template #filter let-l='l'>
+  <div *ngFor="let filter of l.filteri">
+    <button mat-button (click)="reloadLayer(l)">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <mat-form-field appearance="outline" class="searchfield">
+      <mat-label>{{filter.opis}}</mat-label>
+      <input matInput [(ngModel)]="filter.searchstring" (keydown)="$event.stopPropagation()"
+        (keyup.enter)="reloadLayer(l)">
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<ng-template #listitem let-k='k'>
+  <mat-list-item *ngFor="let l of k.layers" style="font-size: small; height: fit-content; padding-bottom: 2px; padding-left: 10px">
+    <div matLine class="mn-slojevi">
+      <button mat-button (click)="clickLayer(l)" class="btn-sloj">
+        <mat-icon *ngIf="!l.checked">check_box_outline_blank</mat-icon>
+        <mat-icon *ngIf="l.checked">check_box</mat-icon>
+        {{l.naziv}}
+      </button>
+      <button  [disabled]="!(l.checked && l.fillColor)"  [ngStyle]="{'opacity': !(l.checked && l.fillColor) ? '0' : '1'}"
+      (click)="changeLayerPreview($event, l)" class="btn-legend" mat-button>
+      <mat-icon [ngStyle]="{'color': l.fillColor}">brush</mat-icon>
+      </button> 
+      <button  [disabled]="!(l.checked && l.legend)"  [ngStyle]="{'opacity': !(l.checked && l.legend) ? '0' : '1'}"
+      (click)="displayLegend(l)" class="btn-legend" mat-button>
+      <mat-icon>live_help</mat-icon>
+      </button>
+    </div>
+    <p matLine *ngIf="l.checked">
+      <ng-container *ngTemplateOutlet="filter; context: {l: l}"></ng-container>
+    </p>
+  </mat-list-item>
+</ng-template>
