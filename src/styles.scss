@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -17,7 +18,7 @@ $gis-warn:    mat-palette($mat-red);
 $gis-warn-light:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$gis-theme: mat-light-theme($gis-primary, $gis-accent, $gis-warn);
+$gis-theme: mat-dark-theme($gis-primary, $gis-accent, $gis-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
