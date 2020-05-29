@@ -33,7 +33,7 @@ import { Layer } from 'src/models/layer';
 export class MapaComponent implements OnInit {
   mymap: L.Map;
   selectedIdKO = 7;
-  KO: KO = { idKO: 7, sifraKO: '013', nazivKO: 'Vrbas-grad', rBrKO: 1, centarx: 45.57185, centary: 19.640113, zoom: 14 };
+  KO: KO = { idKO: 1,  nazivKO: 'Srbobran', rBrKO: 1, centarx: 45.548926, centary: 19.792946, zoom: 15 };
   listaKO: KO[];
   layers: Array<Layer> = [];
   errorMessage: string;

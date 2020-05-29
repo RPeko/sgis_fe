@@ -24,9 +24,9 @@ export class AppComponent implements OnInit {
   currentKO = ' (Srbobran)';
 
  listaKO: KO[] = [
-    { idKO: 1, sifraKO: '', nazivKO: 'Srbobran', rBrKO: 1, centarx: 45.548926, centary: 19.792946, zoom: 15 },
-    { idKO: 2, sifraKO: '', nazivKO: 'Turija', rBrKO: 2, centarx: 45.538982, centary: 19.857641, zoom: 15 },
-    { idKO: 3, sifraKO: '', nazivKO: 'Nadalj', rBrKO: 3, centarx: 45.509002, centary: 19.92212, zoom: 15 },
+    { idKO: 1,  nazivKO: 'Srbobran', rBrKO: 1, centarx: 45.548926, centary: 19.792946, zoom: 15 },
+    { idKO: 2,  nazivKO: 'Turija', rBrKO: 2, centarx: 45.538982, centary: 19.857641, zoom: 15 },
+    { idKO: 3,  nazivKO: 'Nadalj', rBrKO: 3, centarx: 45.509002, centary: 19.92212, zoom: 15 },
   ];
 
 
