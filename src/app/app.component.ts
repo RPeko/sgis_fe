@@ -40,17 +40,17 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.storageMap.get('KO').subscribe((katOpst: KO) => {
+    this.storageMap.get('srbKO').subscribe((katOpst: KO) => {
       if (katOpst) {
         this.eventEmitter.KOChange.emit(katOpst);
         this.currentKO = ' (' + katOpst.nazivKO + ')';
       }
-      this.storageMap.get('mnLayers').subscribe((ls: MenuLayer[]) => {
+      this.storageMap.get('srbMnLayers').subscribe((ls: MenuLayer[]) => {
         if (ls) {
           this.menuLayers = ls;
           // console.log('menuLayers: ' + JSON.stringify(this.menuLayers.length));
         } else {
-          this.storageMap.delete('mnLayers').subscribe();
+          this.storageMap.delete('srbMnLayers').subscribe();
         }
         this.getListaKat();
       });
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
   }
 
   promeniKO(katOpst: KO) {
-    this.storageMap.set('KO', katOpst).subscribe();
+    this.storageMap.set('srbKO', katOpst).subscribe();
     this.eventEmitter.KOChange.emit(katOpst);
     this.currentKO = ' (' + katOpst.nazivKO + ')';
     this.menuLayers.forEach(cl => {
@@ -201,8 +201,7 @@ export class AppComponent implements OnInit {
       ml.checked = layer.checked;
     }
     this.eventEmitter.layerSwitch.emit(layer);
-    this.storageMap.set('mnLayers', this.menuLayers).subscribe();
-    // console.log("menuLAyers: " + localStorage.getItem("mnLayers"));
+    this.storageMap.set('srbMnLayers', this.menuLayers).subscribe();
   }
 
   checkAll(kat: Kategorija) {
@@ -227,7 +226,7 @@ export class AppComponent implements OnInit {
 
   removeAllLayers() {
     this.menuLayers.forEach(ml => ml.checked = false);
-    this.storageMap.set('mnLayers', this.menuLayers).subscribe();
+    this.storageMap.set('srbMnLayers', this.menuLayers).subscribe();
     this.listaKat.forEach(kat => kat.layers.forEach(l => l.filteri.forEach(f => f.searchstring = '')));
     this.listaKat.forEach(kat => kat.subkat.forEach(sk => sk.layers.forEach(l => l.filteri.forEach(f => f.searchstring = ''))));
     this.checkFromStorage();

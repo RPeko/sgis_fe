@@ -18,8 +18,8 @@
         <ng-container *ngFor="let kat of listaKat">
           <h2 matSubheader>
             <button mat-button (click)="toggleCollapsed(kat)">
-              <mat-icon matListIcon *ngIf="!kat.collapsed && (kat.layers.length>0 || kat.subkat.length>0)">
-                arrow_drop_up_circle</mat-icon>
+              <mat-icon *ngIf="!kat.collapsed && (kat.layers.length>0 || kat.subkat.length>0)">
+                arrow_drop_up</mat-icon>
               <mat-icon matListIcon *ngIf="kat.collapsed && (kat.layers.length>0 || kat.subkat.length>0)">
                 arrow_drop_down_circle</mat-icon>
               {{kat.opis}}
@@ -36,7 +36,7 @@
             <mat-list *ngFor="let subkat of kat.subkat" class="subkat">
               <h3 matSubheader>
                 <button mat-button (click)="toggleCollapsed(subkat)">
-                  <mat-icon *ngIf="!subkat.collapsed && subkat.layers.length>0">arrow_drop_up_circle</mat-icon>
+                  <mat-icon *ngIf="!subkat.collapsed && subkat.layers.length>0">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="subkat.collapsed && subkat.layers.length>0">arrow_drop_down_circle</mat-icon>
                   {{subkat.opis}}
                 </button>

@@ -262,9 +262,10 @@ export class MapaComponent implements OnInit {
               linija.info = mlinija.info;
               const lmlMlinija = this.lml(linija) as L.Polyline;
               lmlLinijaLayera.lml.push(lmlMlinija);
-              if (!layer.preserveFitToBounds && this.linijeService.pripadaKO(linija, this.KO)) {
-                lmlZaKO.push(lmlMlinija);
-              }
+              lmlZaKO.push(lmlMlinija);
+              // if (!layer.preserveFitToBounds && this.linijeService.pripadaKO(linija, this.KO)) {
+              //   lmlZaKO.push(lmlMlinija);
+              // }
             }
           });
         }
